@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>RCCL | Liderança, Gestão & Tecnologia</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <style>
+    :root {
+      --bg-cream: #fbf9f6;
+      --bg-sand: #f5f2ed;
+      --navy-dark: #12121f;
+      --gold: #cfb07e;
+      --text-dark: #222226;
+      --text-muted: #65656e;
+      --white: #ffffff;
+      --border: #e6e3df;
+      --shadow: 0 10px 30px rgba(18, 18, 31, 0.04);
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body.dark-mode {
+      --bg-cream: #0f0f14;
+      --bg-sand: #16161f;
+      --navy-dark: #fbf9f6;
+      --text-dark: #e6e3df;
+      --text-muted: #a1a1ab;
+      --white: #171724;
+      --border: #2a2a38;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { 
+      width: 100%;
+      overflow-x: hidden; 
+      position: relative;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-cream);
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+      transition: background var(--transition), color var(--transition);
+    }
+    a { text-decoration: none; color: inherit; }
+    li { list-style: none; }
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+    h1, h2, h3, .logo-rccl { font-family: 'Playfair Display', serif; }
+
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0; height: 3px;
+      background: var(--gold); width: 0%;
+      z-index: 1000; transition: width 0.1s ease-out;
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    header {
+      background: rgba(251, 249, 246, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 999;
+      transition: background var(--transition);
+      width: 100%;
+    }
+    body.dark-mode header { background: rgba(15, 15, 20, 0.92); }
+
+    .navbar { height: 90px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo-rccl { font-size: 26px; font-weight: 700; color: var(--gold); letter-spacing: 3px; flex-shrink: 0; }
+    
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { text-transform: uppercase; letter-spacing: 1.5px; font-size: 11px; font-weight: 600; color: var(--text-dark); transition: var(--transition); white-space: nowrap; }
+    nav a:hover { color: var(--gold); }
+
+    .header-right { display: flex; align-items: center; gap: 12px; z-index: 1001; }
+    
+    .theme-toggle {
+      background: none; border: none; color: var(--text-muted); cursor: pointer;
+      font-size: 18px; width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; transition: var(--transition); flex-shrink: 0;
+    }
+    .theme-toggle:hover { color: var(--gold); background: rgba(207, 176, 126, 0.08); }
+
+    .btn-gold {
+      background: var(--gold); color: #12121f; padding: 10px 18px;
+      text-transform: uppercase; font-size: 10px; font-weight: 700; letter-spacing: 1.1px;
+      border-radius: 4px; transition: var(--transition); display: inline-flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap;
+    }
+    .btn-gold:hover { background: #bd9e6b; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(207, 176, 126, 0.25); }
+
+    .btn-header-destaque {
+      background: var(--gold); color: #12121f; padding: 10px 16px;
+      text-transform: uppercase; font-size: 9.5px; font-weight: 700; letter-spacing: 1px;
+      border-radius: 4px; transition: var(--transition); display: inline-flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap;
+    }
+    .btn-header-destaque:hover { background: #bd9e6b; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(207, 176, 126, 0.25); }
+
+    .menu-trigger { display: none; background: none; border: none; cursor: pointer; color: var(--text-dark); font-size: 26px; }
+
+    /* HERO */
+    .hero {
+      width: 100%;
+      background-color: var(--bg-cream);
+      padding: 60px 0 50px;
+    }
+
+    .eyebrow { text-transform: uppercase; letter-spacing: 3px; color: var(--gold); font-size: 10.5px; font-weight: 700; margin-bottom: 12px; }
+    
+    .main-title-block {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .main-title-block h1 { font-size: clamp(32px, 4.2vw, 52px); line-height: 1.15; font-weight: 400; margin-bottom: 16px; color: var(--text-dark); }
+    .main-title-block h1 span { color: var(--gold); font-style: italic; }
+    .main-title-block p { color: var(--text-muted); font-size: 15px; line-height: 1.7; max-width: 780px; margin: 0 auto; }
+
+    .hero-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 40px; max-width: 580px; margin-left: auto; margin-right: auto; }
+    
+    .btn-navy-block { 
+      background: #12121f; color: #ffffff; width: 100%; padding: 15px 24px; text-transform: uppercase; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; border-radius: 6px; transition: var(--transition); display: inline-block; text-align: center; border: 1px solid rgba(255,255,255,0.1); 
+    }
+    body.dark-mode .btn-navy-block { background: #1f1f2e; }
+    .btn-navy-block:hover { background: var(--gold); color: #12121f; transform: translateY(-2px); }
+    
+    .btn-outline-block { 
+      background: transparent; border: 1px solid var(--border); color: var(--text-dark); width: 100%; padding: 15px 24px; text-transform: uppercase; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; border-radius: 6px; transition: var(--transition); display: inline-block; text-align: center; 
+    }
+    .btn-outline-block:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); background: rgba(207, 176, 126, 0.05); }
+
+    section { padding: 80px 0; }
+    .section-title { text-align: center; text-transform: uppercase; letter-spacing: 2px; font-size: 24px; font-weight: 400; margin-bottom: 50px; }
+    .section-title span { color: var(--gold); }
+
+    /* ÁREAS DE ATUAÇÃO */
+    .areas-list { display: flex; flex-direction: column; gap: 20px; max-width: 900px; margin: 0 auto; }
+    .area-row {
+      background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+      padding: 30px 36px; display: flex; align-items: flex-start; gap: 28px;
+      box-shadow: var(--shadow); transition: var(--transition);
+    }
+    .area-row:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .area-icon-box {
+      width: 60px; height: 60px; background: rgba(207, 176, 126, 0.1); border-radius: 10px;
+      display: grid; place-items: center; color: var(--gold); font-size: 28px; flex-shrink: 0;
+    }
+    .area-content h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: var(--text-dark); }
+    .area-content p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+
+    /* SOLUÇÕES */
+    .solutions { background: var(--bg-sand); }
+    .solutions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .sol-card {
+      background: #12121f; border-radius: 10px; padding: 40px 24px; text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      transition: var(--transition); display: flex; flex-direction: column; align-items: center; position: relative;
+    }
+    .sol-card:hover { 
+      transform: translateY(-8px); border-color: rgba(207, 176, 126, 0.4);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 20px rgba(207, 176, 126, 0.1); 
+    }
+    .sol-icon { color: var(--gold); font-size: 38px; margin-bottom: 20px; display: inline-block; transition: var(--transition); }
+    .sol-card:hover .sol-icon { transform: scale(1.1); }
+    .sol-card h3 { color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+    .sol-card p { color: rgba(255, 255, 255, 0.7); font-size: 13px; line-height: 1.6; }
+
+    .timeline-wrapper { position: relative; padding: 40px 0; margin-top: 20px; }
+    .timeline-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; z-index: 2; }
+    .time-item { background: var(--white); padding: 30px; border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow); text-align: left; }
+    .time-dot { width: 44px; height: 44px; background: #12121f; color: var(--gold); border-radius: 50%; display: grid; place-items: center; margin-bottom: 18px; font-size: 18px; box-shadow: 0 4px 15px rgba(18, 18, 31, 0.2); transition: var(--transition); }
+    body.dark-mode .time-dot { background: var(--white); }
+    .time-item h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: var(--text-dark); }
+    .time-item p { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+
+    .testimonials { background: var(--bg-sand); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testimonial-card { background: var(--white); padding: 40px; border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; }
+    .mark { color: var(--gold); font-size: 32px; line-height: 1; margin-bottom: 12px; }
+    .testimonial-card p { font-size: 13.5px; line-height: 1.65; color: var(--text-dark); margin-bottom: 24px; }
+    .testimonial-card strong { display: block; font-size: 13px; font-weight: 700; }
+    .testimonial-card span { font-size: 11px; color: var(--text-muted); }
+    .slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: 40px; }
+    .dot { width: 6px; height: 6px; background: var(--border); border-radius: 50%; }
+    .dot.active { background: var(--gold); width: 18px; border-radius: 4px; transition: var(--transition); }
+
+    /* SEÇÃO "QUEM ESTÁ POR TRÁS" - FOTO INTEGRADA SEM CAIXA BRANCA */
+    .about-author { background: var(--bg-sand); }
+    .about-author-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    
+    .about-author-img-container {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .about-author-img { 
+      width: 100%; 
+      height: auto; 
+      max-height: 480px; 
+      object-fit: cover; 
+      border-radius: 12px; 
+      display: block;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      transition: var(--transition);
+    }
+    .about-author-img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .about-author-content h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 400; line-height: 1.2; margin-bottom: 20px; }
+    .about-author-content h2 span { color: var(--gold); font-style: italic; }
+    .about-author-content p { color: var(--text-muted); font-size: 14.5px; line-height: 1.7; margin-bottom: 16px; }
+
+    .contact-section { background: var(--bg-cream); padding: 90px 0; }
+    .contact-box { 
+      background: var(--white); border: 1px solid var(--border); border-radius: 12px; 
+      padding: 56px 40px; max-width: 900px; margin: 0 auto; text-align: center; box-shadow: var(--shadow);
+    }
+    .contact-box h2 { font-size: 32px; font-weight: 400; margin-bottom: 12px; color: var(--text-dark); }
+    .contact-box h2 span { color: var(--gold); font-style: italic; }
+    .contact-box p { color: var(--text-muted); font-size: 15px; margin-bottom: 36px; max-width: 650px; margin-left: auto; margin-right: auto; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+    .form-inputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .form-inputs input, .form-inputs select {
+      width: 100%; padding: 16px; background: var(--bg-cream);
+      border: 1px solid var(--border); border-radius: 6px;
+      color: var(--text-dark); font-size: 13px; outline: none; transition: var(--transition);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .form-inputs input:focus, .form-inputs select:focus { border-color: var(--gold); background: var(--white); box-shadow: 0 0 0 3px rgba(207, 176, 126, 0.15); }
+    .form-inputs input::placeholder { color: var(--text-muted); opacity: 0.7; }
+
+    .form-terms { text-align: left; font-size: 12.5px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+    .form-terms input[type="checkbox"] { accent-color: var(--gold); width: 16px; height: 16px; cursor: pointer; }
+    .form-terms a { color: var(--gold); text-decoration: underline; }
+
+    .btn-submit {
+      width: 100%; background: var(--gold); color: #12121f; border: none; padding: 18px;
+      font-size: 16px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; text-transform: uppercase;
+      letter-spacing: 1px; border-radius: 6px; cursor: pointer; transition: var(--transition); margin-top: 10px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .btn-submit:hover { background: #bd9e6b; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(207, 176, 126, 0.3); }
+
+    footer { background: #0b0b12; color: #ffffff; padding: 70px 0 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.3fr; gap: 40px; margin-bottom: 50px; }
+    
+    .footer-brand .logo-rccl { font-size: 28px; display: inline-block; margin-bottom: 16px; }
+    .footer-brand p { font-size: 12.5px; color: rgba(255, 255, 255, 0.6); line-height: 1.6; margin-top: 10px; }
+    .footer-col h4 { font-size: 14px; font-weight: 700; letter-spacing: 1px; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul a { font-size: 13px; color: rgba(255, 255, 255, 0.7); transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; }
+    .footer-col ul a:hover { color: var(--gold); transform: translateX(4px); }
+    .footer-col ul a i { color: var(--gold); font-size: 12px; }
+
+    .social-links { display: flex; gap: 12px; margin-top: 16px; }
+    .social-links a { width: 34px; height: 34px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; display: grid; place-items: center; color: var(--gold); font-size: 16px; transition: var(--transition); }
+    .social-links a:hover { background: var(--gold); color: #12121f; transform: translateY(-2px); }
+
+    .contact-list li { font-size: 13px; color: rgba(255, 255, 255, 0.7); display: flex; align-items: flex-start; gap: 12px; line-height: 1.5; margin-bottom: 12px; }
+    .contact-list li i { color: var(--gold); font-size: 18px; margin-top: 2px; flex-shrink: 0; }
+
+    .footer-address-card {
+      background: rgba(207, 176, 126, 0.04);
+      border: 1px solid rgba(207, 176, 126, 0.15);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 8px;
+    }
+    .footer-address-card .addr-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-address-card p {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+    }
+
+    .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 24px; text-align: center; font-size: 11px; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 1px; display: flex; flex-direction: column; gap: 6px; }
+    .footer-legal-links { display: flex; justify-content: center; gap: 16px; margin-top: 4px; }
+    .footer-legal-links a { color: rgba(255, 255, 255, 0.6); text-decoration: underline; font-size: 10.5px; }
+
+    @media (max-width: 1200px) {
+      nav { gap: 16px; }
+      nav a { font-size: 10px; letter-spacing: 1px; }
+    }
+
+    @media (max-width: 1024px) {
+      .menu-trigger { display: block; z-index: 1002; }
+      nav { 
+        position: fixed; top: 0; right: 0; width: 80%; max-width: 320px;
+        height: 100vh; height: 100dvh; background: var(--bg-cream); 
+        display: flex; flex-direction: column; justify-content: center; align-items: center; 
+        gap: 24px; transform: translateX(100%); visibility: hidden;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+        z-index: 1000; padding: 40px 20px; box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+      }
+      body.dark-mode nav { background: #171724; }
+      nav.active { transform: translateX(0); visibility: visible; }
+      nav a { font-size: 15px; font-weight: 700; letter-spacing: 2px; }
+      
+      .about-author-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-author-img-container { max-width: 100%; }
+
+      .solutions-grid, .timeline-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .form-inputs { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .area-row { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .solutions-grid, .timeline-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .contact-box { padding: 36px 20px; }
+      .btn-header-destaque span { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="scroll-progress"></div>
+
+  <header>
+    <div class="container navbar">
+      <a href="#inicio" class="logo-rccl">RCCL <span style="font-size: 13px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; color: var(--text-muted); margin-left: 6px;">| Liderança, Gestão & Tecnologia</span></a>
+
+      <nav id="menu">
+        <a href="#inicio" onclick="toggleMenu()">Home</a>
+        <a href="#frentes" onclick="toggleMenu()">Áreas</a>
+        <a href="#solucoes" onclick="toggleMenu()">Soluções</a>
+        <a href="workshop.html" target="_blank" rel="noopener noreferrer" onclick="toggleMenu()" style="color: var(--gold);">Workshop</a>
+        <a href="#trajetoria" onclick="toggleMenu()">Trajetória</a>
+        <a href="#depoimentos" onclick="toggleMenu()">Depoimentos</a>
+        <a href="#sobre" onclick="toggleMenu()">Sobre</a>
+        <a href="#contato" onclick="toggleMenu()">Contato</a>
+      </nav>
+
+      <div class="header-right">
+        <a href="workshop.html" target="_blank" rel="noopener noreferrer" class="btn-header-destaque">
+          Conhecer Workshop
+        </a>
+
+        <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Alternar tema">
+          <i class="ph ph-moon"></i>
+        </button>
+
+        <a href="https://wa.link/y60csi" target="_blank" rel="noopener noreferrer" class="btn-gold">
+          <i class="ph ph-whatsapp-logo" style="font-size: 14px;"></i> Fale Conosco
+        </a>
+        
+        <button class="menu-trigger" id="menuBtn" onclick="toggleMenu()" aria-label="Abrir Menu">
+          <i class="ph ph-list"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="inicio">
+    <div class="container">
+      <div class="reveal">
+        
+        <div class="main-title-block">
+          <div class="eyebrow" style="margin-bottom: 8px;">Consultoria Estratégica Integrada</div>
+          <h1>Pessoas em potência. <span>Negócios em evolução.</span></h1>
+          <p>Desenvolvemos líderes, estruturamos a gestão e aplicamos tecnologia para transformar desafios em resultados sustentáveis.</p>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#solucoes" class="btn-navy-block">Nossas Soluções</a>
+          <a href="#sobre" class="btn-outline-block">Quem está por trás da RCCL</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ÁREAS DE ATUAÇÃO -->
+  <section id="frentes">
+    <div class="container">
+      <h2 class="section-title reveal">Áreas de <span>atuação</span></h2>
+      <div class="areas-list">
+        
+        <article class="area-row reveal">
+          <div class="area-icon-box">
+            <i class="ph ph-users-three"></i>
+          </div>
+          <div class="area-content">
+            <h3>Liderança e Cultura</h3>
+            <p>Workshops oficiais, desenvolvimento de lideranças, mentorias individuais e jornadas estruturadas para equipes de alto impacto.</p>
+          </div>
+        </article>
+        
+        <article class="area-row reveal">
+          <div class="area-icon-box">
+            <i class="ph ph-chart-line-up"></i>
+          </div>
+          <div class="area-content">
+            <h3>Gestão e Eficiência</h3>
+            <p>Diagnóstico empresarial completo, organização da gestão, desenho de processos, indicadores de desempenho (KPIs) e planos de ação práticos.</p>
+          </div>
+        </article>
+
+        <article class="area-row reveal">
+          <div class="area-icon-box">
+            <i class="ph ph-cpu"></i>
+          </div>
+          <div class="area-content">
+            <h3>Tecnologia Aplicada</h3>
+            <p>Automação de fluxos de trabalho, integração de Inteligência Artificial, gestão orientada a dados e redução drástica de retrabalho operacional.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUÇÕES COMPLETAS -->
+  <section class="solutions" id="solucoes">
+    <div class="container">
+      <h2 class="section-title reveal">Soluções estruturadas para <span>sua empresa</span></h2>
+      <div class="solutions-grid">
+        
+        <article class="sol-card reveal">
+          <i class="ph ph-crown sol-icon"></i>
+          <h3>Desenvolvimento de Lideranças</h3>
+          <p>Desenvolvimento de competências para liderar pessoas, promover autonomia, enfrentar mudanças e gerar resultados em ambientes complexos.</p>
+        </article>
+
+        <article class="sol-card reveal">
+          <i class="ph ph-presentation sol-icon"></i>
+          <h3>Workshops Oficiais</h3>
+          <p>Facilitação oficial de Management 3.0, M3K e UNFIX, conduzindo experiências práticas de aprendizagem e transformação organizacional.</p>
+        </article>
+
+        <article class="sol-card reveal">
+          <i class="ph ph-buildings sol-icon"></i>
+          <h3>Consultoria em Gestão & Processos</h3>
+          <p>Diagnóstico empresarial, estruturação de rotinas, melhoria contínua de processos e alinhamento estratégico direcionado ao crescimento.</p>
+        </article>
+
+        <article class="sol-card reveal">
+          <i class="ph ph-gear-six sol-icon"></i>
+          <h3>Automação de Processos</h3>
+          <p>Mapeamento e automação de atividades repetitivas, otimizando fluxos de trabalho operacionais para elevar a produtividade da equipe.</p>
+        </article>
+
+        <article class="sol-card reveal">
+          <i class="ph ph-brain sol-icon"></i>
+          <h3>Inteligência Artificial & Dados</h3>
+          <p>Organização das informações e implantação de soluções práticas de IA que reduzem o retrabalho e apoiam a tomada de decisão executiva.</p>
+        </article>
+
+        <article class="sol-card reveal" style="border-color: rgba(207, 176, 126, 0.4);">
+          <i class="ph ph-chats-circle sol-icon" style="color: var(--gold);"></i>
+          <h3>Mentoria Individual</h3>
+          <p>Acompanhamento executivo direto com Rita Lima para líderes e empresários que buscam clareza estratégica e aceleração de carreira.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAJETÓRIA -->
+  <section id="trajetoria">
+    <div class="container">
+      <h2 class="section-title reveal">Experiência que conecta <span>pessoas, gestão e tecnologia</span></h2>
+      <div class="timeline-wrapper reveal">
+        <div class="timeline-grid">
+          
+          <article class="time-item">
+            <div class="time-dot"><i class="ph ph-briefcase"></i></div>
+            <h3>Vivência Executiva</h3>
+            <p>Mais de 18 anos de experiência sólida no setor financeiro e corporativo, acumulando 12 anos dedicados à gestão avançada de relacionamento e negócios.</p>
+          </article>
+
+          <article class="time-item">
+            <div class="time-dot"><i class="ph ph-users"></i></div>
+            <h3>Liderança e Operações</h3>
+            <p>Histórico comprovado na estruturação e implantação de novas operações corporativas, com liderança direta de equipes superiores a 40 profissionais.</p>
+          </article>
+
+          <article class="time-item">
+            <div class="time-dot"><i class="ph ph-graduation-cap"></i></div>
+            <h3>Formação e Certificações</h3>
+            <p>Especialista em Inteligência Artificial e Big Data pela USP. Facilitadora oficial e habilitada em Management 3.0, M3K e UNFIX.</p>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="testimonials" id="depoimentos">
+    <div class="container">
+      <h2 class="section-title reveal">O que dizem sobre a <span>jornada</span></h2>
+      <div class="testimonials-grid reveal">
+        
+        <article class="testimonial-card">
+          <div>
+            <div class="mark">“</div>
+            <p>A condução da Rita traz uma clareza impressionante entre a teoria e a prática. Conectou nossa equipe em torno de um propósito real de melhoria contínua.</p>
+          </div>
+          <div>
+            <strong>Participante do Workshop Management 3.0</strong>
+            <span>Turma oficial certificada</span>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div>
+            <div class="mark">“</div>
+            <p>A visão integrada de gestão e automação mudou o patamar da nossa operação. A capacidade de organizar processos complexos com leveza é um diferencial único.</p>
+          </div>
+          <div>
+            <strong>Gestor Corporativo</strong>
+            <span>Cliente de Consultoria e Processos</span>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div>
+            <div class="mark">“</div>
+            <p>A mentoria individual abriu minha visão executiva. O suporte estratégico direto me deu a segurança necessária para tomar decisões cruciais na empresa.</p>
+          </div>
+          <div>
+            <strong>Liderança Executiva</strong>
+            <span>Programa de Mentoria Individual</span>
+          </div>
+        </article>
+
+      </div>
+      <div class="slider-dots">
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO "QUEM ESTÁ POR TRÁS" -->
+  <section class="about-author" id="sobre">
+    <div class="container">
+      <div class="about-author-grid reveal">
+        <div class="about-author-img-container">
+          <img src="https://i.ibb.co/6JVgNBCH/IMG-20260909-WA0368.jpg" alt="Rita Lima - Fundadora da RCCL" class="about-author-img">
+        </div>
+        <div class="about-author-content">
+          <div class="eyebrow">Quem está por trás da RCCL</div>
+          <h2>Conectando pessoas, <span>gestão e tecnologia</span></h2>
+          <p>A RCCL nasceu da convicção de que empresas alcançam alta performance quando liderança, processos e ferramentas tecnológicas caminham em perfeita sincronia.</p>
+          <p>Fundada por Rita Lima — especialista com sólida vivência executiva, formação em IA e Big Data pela USP e facilitação oficial em frameworks modernos de gestão —, nossa atuação é fundamentada em pragmatismo, empatia e foco absoluto em resultados reais.</p>
+          <p>Cada projeto é desenhado sob medida para respeitar a cultura da sua organização, capacitando equipes e construindo bases sólidas para o crescimento contínuo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contact-section" id="contato">
+    <div class="container reveal">
+      <div class="contact-box">
+        <h2>Vamos impulsionar os resultados da <span>sua empresa?</span></h2>
+        <p>Preencha os campos abaixo para iniciar uma conversa estratégica com nossa equipe.</p>
+        
+        <form class="contact-form" onsubmit="handleContact(event)">
+          <div class="form-inputs">
+            <input type="text" id="c-nome" placeholder="Seu nome completo" required>
+            <input type="tel" id="c-fone" placeholder="WhatsApp / Telefone" required>
+            <input type="email" id="c-email" placeholder="Seu e-mail corporativo" required>
+          </div>
+
+          <div class="form-inputs" style="grid-template-columns: 1fr;">
+            <select id="c-servico" required style="width: 100%;">
+              <option value="" disabled selected>Como podemos ajudar? (Selecione a área/serviço)</option>
+              <option value="Liderança e Cultura / Workshops">Liderança e Cultura / Workshops oficiais</option>
+              <option value="Gestão e Eficiência / Consultoria">Gestão e Eficiência / Consultoria empresarial</option>
+              <option value="Tecnologia / Automação e IA">Tecnologia Aplicada (Automação e IA)</option>
+              <option value="Mentoria Individual">Mentoria Individual</option>
+              <option value="Outros Assuntos">Outros Assuntos</option>
+            </select>
+          </div>
+
+          <div class="form-terms">
+            <input type="checkbox" id="c-terms" required>
+            <label for="c-terms">Concordo com a <a href="#privacidade" onclick="alert('Política de Privacidade: Seus dados preenchidos serão utilizados exclusivamente para retorno comercial da equipe RCCL e não serão compartilhados com terceiros.'); return false;">Política de Privacidade</a> e autorizo o contato da equipe da RCCL.</label>
+          </div>
+
+          <button type="submit" class="btn-submit" id="btn-submit">
+            <i class="ph ph-chat-circle-dots" style="font-size: 20px;"></i> Agendar uma conversa
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <a href="#inicio" class="logo-rccl">RCCL</a>
+          <p>Consultoria e desenvolvimento integrando liderança, gestão e tecnologia para impulsionar negócios.</p>
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#inicio"><i class="ph ph-caret-right"></i> Home</a></li>
+            <li><a href="#sobre"><i class="ph ph-caret-right"></i> Sobre a Rita</a></li>
+            <li><a href="#frentes"><i class="ph ph-caret-right"></i> Áreas</a></li>
+            <li><a href="#solucoes"><i class="ph ph-caret-right"></i> Soluções</a></li>
+            <li><a href="#depoimentos"><i class="ph ph-caret-right"></i> Depoimentos</a></li>
+            <li><a href="#contato"><i class="ph ph-caret-right"></i> Contato</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Soluções</h4>
+          <ul>
+            <li><a href="#solucoes"><i class="ph ph-caret-right"></i> Liderança e Cultura</a></li>
+            <li><a href="#solucoes"><i class="ph ph-caret-right"></i> Gestão e Eficiência</a></li>
+            <li><a href="#solucoes"><i class="ph ph-caret-right"></i> Tecnologia Aplicada</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contato & Localização</h4>
+          <ul class="contact-list">
+            <li>
+              <i class="ph ph-whatsapp-logo"></i>
+              <span><a href="https://wa.link/y60csi" target="_blank" rel="noopener noreferrer">Atendimento direto no WhatsApp</a></span>
+            </li>
+            <li>
+              <i class="ph ph-envelope-simple"></i>
+              <span>RCCLACESSORIA@GMAIL.COM</span>
+            </li>
+            <li>
+              <i class="ph ph-identification-card"></i>
+              <span>CNPJ: 66.520.595/0001-14</span>
+            </li>
+          </ul>
+
+          <div class="footer-address-card">
+            <div class="addr-title">
+              <i class="ph ph-map-pin" style="font-size: 14px;"></i> Atendimento
+            </div>
+            <p>Consultoria e treinamentos on-line para todo o Brasil.<br>Lauro de Freitas • Bahia</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>RCCL &copy; 2026. RITA LIMA • LIDERANÇA • CULTURA • PESSOAS • RESULTADOS. TODOS OS DIREITOS RESERVADOS.</div>
+        <div class="footer-legal-links">
+          <a href="#termos" onclick="alert('Termos de Uso: Conteúdo protegido por propriedade intelectual da RCCL Consultoria.'); return false;">Termos de Uso</a>
+          <a href="#privacidade" onclick="alert('Política de Privacidade: Proteção e sigilo de dados em conformidade com as diretrizes corporativas.'); return false;">Política de Privacidade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    async function handleContact(e) {
+      e.preventDefault();
+      const btnSubmit = document.getElementById('btn-submit');
+      const originalText = btnSubmit.innerHTML;
+      btnSubmit.innerHTML = 'Enviando solicitação...';
+      btnSubmit.disabled = true;
+
+      const nome = document.getElementById('c-nome').value;
+      const telefone = document.getElementById('c-fone').value;
+      const email = document.getElementById('c-email').value;
+      const servico = document.getElementById('c-servico').value;
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwgv7DE5bSAwBiLDR9h3i_1CsVqNbyWesd0ImyHW-6QKxNZSJ9g0dnhU1cIsfpunGV_zQ/exec';
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome, telefone, email, servico })
+        });
+        alert('Obrigado! Sua solicitação foi enviada com sucesso. Entraremos em contato em breve.');
+        e.target.reset();
+      } catch (error) {
+        alert('Ocorreu um erro ao enviar os dados. Por favor, tente novamente ou fale conosco pelo WhatsApp.');
+        console.error('Erro:', error);
+      } finally {
+        btnSubmit.innerHTML = originalText;
+        btnSubmit.disabled = false;
+      }
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      const menuBtnIcon = document.querySelector('#menuBtn i');
+      
+      if (window.innerWidth <= 1024) {
+        menu.classList.toggle('active');
+        if (menu.classList.contains('active')) {
+          menuBtnIcon.className = 'ph ph-x';
+          document.body.style.overflow = 'hidden';
+        } else {
+          menuBtnIcon.className = 'ph ph-list';
+          document.body.style.overflow = 'auto';
+        }
+      }
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+      const icon = document.querySelector('#themeBtn i');
+      if (document.body.classList.contains('dark-mode')) {
+        icon.className = 'ph ph-sun';
+      } else {
+        icon.className = 'ph ph-moon';
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('scroll-progress').style.width = scrolled + '%';
+
+      const reveals = document.querySelectorAll('.reveal');
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 100;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add('active');
+        }
+      }
+    });
+
+    window.dispatchEvent(new Event('scroll'));
+  </script>
+</body>
+</html>
