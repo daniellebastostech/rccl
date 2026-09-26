@@ -16,10 +16,10 @@
       --card-bg: #ffffff;
       --text-main: #1e293b;
       --text-muted: #64748b;
-      --primary: #0088cc; /* Azul oficial Management 3.0 */
+      --primary: #0088cc;
       --primary-hover: #006b9e;
-      --accent-orange: #f26522; /* Laranja de energia / ferramentas */
-      --accent-green: #00a651; /* Verde do ecossistema / Martie */
+      --accent-orange: #f26522;
+      --accent-green: #00a651;
       --border-color: #e2e8f0;
       --shadow: 0 4px 20px rgba(0, 136, 204, 0.06);
       --transition: all 0.3s ease;
@@ -52,7 +52,6 @@
     ul { list-style: none; }
     .container { width: min(1000px, 90%); margin: 0 auto; }
 
-    /* Header */
     header {
       background-color: var(--card-bg);
       border-bottom: 1px solid var(--border-color);
@@ -63,7 +62,6 @@
       display: flex; justify-content: space-between; align-items: center; height: 80px;
     }
     
-    /* Estilização do Logo no Header */
     .brand-container {
       display: flex;
       align-items: center;
@@ -92,7 +90,6 @@
     }
     .theme-toggle:hover { background-color: rgba(0, 136, 204, 0.1); color: var(--primary); }
 
-    /* Botão Padrão */
     .btn-primary {
       background-color: var(--primary); color: #ffffff;
       padding: 14px 28px; font-size: 14px; font-weight: 600;
@@ -109,7 +106,6 @@
       margin-top: 24px;
     }
 
-    /* Hero Section */
     .hero {
       padding: 80px 0; background-color: var(--bg-color);
     }
@@ -140,7 +136,6 @@
     .meta-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); }
     .meta-item i { color: var(--primary); font-size: 18px; }
 
-    /* Seções Gerais */
     section { padding: 80px 0; border-bottom: 1px solid var(--border-color); }
     .section-title {
       font-family: 'Playfair Display', serif; font-size: 30px; text-align: center; margin-bottom: 14px; font-weight: 700;
@@ -149,7 +144,6 @@
       text-align: center; color: var(--text-muted); font-size: 15px; max-width: 650px; margin: 0 auto 50px auto;
     }
 
-    /* ACORDEÃO / LISTA DE MÓDULOS */
     .accordion-list {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -161,61 +155,29 @@
       border-bottom: 1px solid var(--border-color);
       transition: var(--transition);
     }
-    .accordion-item:last-child {
-      border-bottom: none;
-    }
+    .accordion-item:last-child { border-bottom: none; }
     .accordion-header {
-      width: 100%;
-      background: none;
-      border: none;
-      padding: 22px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      text-align: left;
-      font-family: 'Inter', sans-serif;
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--text-main);
+      width: 100%; background: none; border: none; padding: 22px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; text-align: left; font-family: 'Inter', sans-serif;
+      font-size: 17px; font-weight: 600; color: var(--text-main);
       transition: var(--transition);
     }
-    .accordion-header:hover {
-      background-color: rgba(0, 136, 204, 0.04);
-      color: var(--primary);
-    }
-    .accordion-header i {
-      font-size: 18px;
-      color: var(--text-muted);
-      transition: transform 0.3s ease;
-    }
-    .accordion-item.active .accordion-header i {
-      transform: rotate(180deg);
-      color: var(--primary);
-    }
+    .accordion-header:hover { background-color: rgba(0, 136, 204, 0.04); color: var(--primary); }
+    .accordion-header i { font-size: 18px; color: var(--text-muted); transition: transform 0.3s ease; }
+    .accordion-item.active .accordion-header i { transform: rotate(180deg); color: var(--primary); }
     .accordion-body {
-      max-height: 0;
-      overflow: hidden;
+      max-height: 0; overflow: hidden;
       transition: max-height 0.35s ease-out, padding 0.35s ease;
-      padding: 0 28px;
-      background-color: var(--bg-color);
+      padding: 0 28px; background-color: var(--bg-color);
     }
-    .accordion-item.active .accordion-body {
-      max-height: 200px;
-      padding: 0 28px 22px 28px;
-    }
+    .accordion-item.active .accordion-body { max-height: 200px; padding: 0 28px 22px 28px; }
     .accordion-body p {
-      font-size: 14.5px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      padding-top: 10px;
-      border-top: 1px dashed var(--border-color);
+      font-size: 14.5px; color: var(--text-muted); line-height: 1.6;
+      padding-top: 10px; border-top: 1px dashed var(--border-color);
     }
 
-    /* Visão Geral Cards */
-    .overview-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-    }
+    .overview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .overview-card {
       background-color: var(--card-bg); border: 1px solid var(--border-color);
       border-radius: 10px; padding: 28px; box-shadow: var(--shadow);
@@ -225,10 +187,7 @@
     .overview-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
     .overview-card p { font-size: 14px; color: var(--text-muted); }
 
-    /* Para quem é destinado */
-    .target-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
-    }
+    .target-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .target-card {
       background-color: var(--card-bg); border: 1px solid var(--border-color);
       border-radius: 10px; padding: 24px; box-shadow: var(--shadow);
@@ -238,48 +197,18 @@
     .target-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
     .target-card p { font-size: 14px; color: var(--text-muted); }
 
-    /* Seção de Princípios */
     .principles-box {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 36px;
-      box-shadow: var(--shadow);
+      background-color: var(--card-bg); border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 36px; box-shadow: var(--shadow);
       border-left: 4px solid var(--accent-green);
     }
-    .principles-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-    }
-    .principles-col h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      color: var(--primary);
-      margin-bottom: 16px;
-    }
-    .principles-col ul {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .principles-col li {
-      font-size: 14.5px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .principles-col li i {
-      color: var(--accent-green);
-      font-size: 18px;
-      margin-top: 2px;
-    }
+    .principles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .principles-col h4 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--primary); margin-bottom: 16px; }
+    .principles-col ul { display: flex; flex-direction: column; gap: 12px; }
+    .principles-col li { font-size: 14.5px; color: var(--text-muted); display: flex; align-items: flex-start; gap: 10px; }
+    .principles-col li i { color: var(--accent-green); font-size: 18px; margin-top: 2px; }
 
-    /* Depoimentos */
-    .testimonials-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-    }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .testimonial-card {
       background-color: var(--card-bg); border: 1px solid var(--border-color);
       border-radius: 10px; padding: 28px; box-shadow: var(--shadow);
@@ -288,7 +217,6 @@
     .testimonial-card p { font-size: 14px; font-style: italic; color: var(--text-main); margin-bottom: 20px; }
     .testimonial-author { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 1px; }
 
-    /* Footer */
     footer {
       background-color: var(--card-bg); padding: 40px 0; text-align: center;
       font-size: 13px; color: var(--text-muted);
@@ -307,7 +235,7 @@
   <header>
     <div class="container navbar">
       <div class="brand-container">
-        <!-- Logotipo oficial do Management 3.0 puxado diretamente do site oficial -->
+        <!-- Logotipo oficial do Management 3.0 -->
         <a href="https://management30.com/" target="_blank" rel="noopener noreferrer">
           <img src="https://management30.com/wp-content/themes/management30/images/logo.svg" alt="Management 3.0 Logo" class="m3-logo">
         </a>
@@ -352,7 +280,7 @@
     </div>
   </section>
 
-  <!-- PARA QUEM É DESTINADO O WORKSHOP -->
+  <!-- PARA QUEM É DESTINADO -->
   <section style="background-color: var(--card-bg);">
     <div class="container">
       <h2 class="section-title">Para quem é destinado?</h2>
@@ -417,7 +345,7 @@
     </div>
   </section>
 
-  <!-- PRINCÍPIOS DO MANAGEMENT 3.0 -->
+  <!-- PRINCÍPIOS -->
   <section style="background-color: var(--card-bg);">
     <div class="container">
       <h2 class="section-title">Princípios do Management 3.0</h2>
@@ -456,7 +384,6 @@
       <p class="section-subtitle">Módulos detalhados abordados durante a certificação oficial.</p>
 
       <div class="accordion-list">
-        
         <div class="accordion-item">
           <button class="accordion-header" onclick="toggleAccordion(this)">
             <span>Gestão e Liderança</span>
@@ -536,7 +463,6 @@
             <p>Como apoiar transformações complexas, superar resistências e utilizar o Celebration Grid para aprender com experimentos.</p>
           </div>
         </div>
-
       </div>
 
       <div class="btn-center-wrapper" style="margin-top: 40px;">
@@ -547,7 +473,7 @@
     </div>
   </section>
 
-  <!-- DEPOIMENTOS REAIS DA FACILITADORA RITA LIMA -->
+  <!-- DEPOIMENTOS -->
   <section>
     <div class="container">
       <h2 class="section-title">O que quem participou diz</h2>
