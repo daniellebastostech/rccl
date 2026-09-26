@@ -62,11 +62,28 @@
     .navbar {
       display: flex; justify-content: space-between; align-items: center; height: 80px;
     }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px; font-weight: 700; color: var(--primary);
-      letter-spacing: 0.5px;
+    
+    /* Estilização do Logo no Header */
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
+    .m3-logo {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+    .divider-vertical {
+      width: 1px;
+      height: 24px;
+      background-color: var(--border-color);
+    }
+    .rccl-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 700; color: var(--primary);
+    }
+
     .theme-toggle {
       background: none; border: none; cursor: pointer; color: var(--text-muted);
       font-size: 20px; width: 38px; height: 38px; border-radius: 50%;
@@ -289,9 +306,15 @@
   <!-- HEADER -->
   <header>
     <div class="container navbar">
-      <div class="logo-container">
-        <a href="#" class="logo">RCCL <span style="font-weight: 300; font-size: 13px; color: var(--text-muted);">| Workshop</span></a>
+      <div class="brand-container">
+        <!-- Logotipo oficial do Management 3.0 puxado diretamente do site oficial -->
+        <a href="https://management30.com/" target="_blank" rel="noopener noreferrer">
+          <img src="https://management30.com/wp-content/themes/management30/images/logo.svg" alt="Management 3.0 Logo" class="m3-logo">
+        </a>
+        <div class="divider-vertical"></div>
+        <span class="rccl-brand">Rita Lima</span>
       </div>
+      
       <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Mudar tema">
         <i class="ph ph-moon"></i>
       </button>
