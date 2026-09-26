@@ -50,7 +50,7 @@
 
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
-    .container { width: min(1050px, 90%); margin: 0 auto; }
+    .container { width: min(1080px, 90%); margin: 0 auto; }
 
     header {
       background-color: var(--card-bg);
@@ -92,53 +92,55 @@
 
     .btn-primary {
       background-color: var(--primary); color: #ffffff;
-      padding: 14px 28px; font-size: 14px; font-weight: 600;
+      padding: 12px 24px; font-size: 13.5px; font-weight: 600;
       border-radius: 6px; display: inline-flex; align-items: center; justify-content: center;
       gap: 8px; transition: var(--transition); text-align: center;
     }
     body.dark-mode .btn-primary { color: #0f172a; }
     .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
 
-    .btn-center-wrapper {
+    /* Alinhamento ajustado do botão principal na coluna de texto */
+    .btn-wrapper {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       width: 100%;
-      margin-top: 24px;
+      margin-top: 20px;
     }
 
     .hero {
-      padding: 80px 0; background-color: var(--bg-color);
+      padding: 70px 0; background-color: var(--bg-color);
     }
     
-    /* Grid de 3 colunas para o Hero: Texto | Imagem no Meio | Quadro da Turma */
+    /* Grid de 3 colunas balanceado */
     .hero-grid {
       display: grid; 
-      grid-template-columns: 1.1fr 0.8fr 0.9fr; 
-      gap: 24px; 
+      grid-template-columns: 1.2fr 0.7fr 0.9fr; 
+      gap: 20px; 
       align-items: center;
     }
 
     .badge {
       display: inline-block; background-color: rgba(0, 166, 81, 0.1);
-      color: var(--accent-green); font-size: 12px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 1.5px; padding: 6px 12px; border-radius: 4px; margin-bottom: 20px;
+      color: var(--accent-green); font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; padding: 5px 10px; border-radius: 4px; margin-bottom: 16px;
     }
     
+    /* Título com fonte menor para encaixar perfeitamente em uma linha e não estourar */
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(24px, 2.8vw, 36px); 
+      font-size: clamp(20px, 2.2vw, 29px); 
       line-height: 1.2; 
       font-weight: 700; 
-      margin-bottom: 20px; 
+      margin-bottom: 16px; 
       white-space: nowrap; 
       color: var(--primary);
     }
 
     .hero p {
-      color: var(--text-muted); font-size: 15px; margin-bottom: 20px;
+      color: var(--text-muted); font-size: 14.5px; margin-bottom: 16px;
     }
 
-    /* Coluna central para a imagem ficar perfeitamente entre o texto e o quadro */
+    /* Coluna central com imagem maior e destacada */
     .hero-middle-col {
       display: flex;
       flex-direction: column;
@@ -149,23 +151,24 @@
 
     .hero-custom-image {
       width: 100%;
-      max-width: 220px;
+      max-width: 270px; /* Aumentado para não ficar muito pequena */
       height: auto;
       border-radius: 12px;
       object-fit: contain;
     }
 
+    /* Quadro da direita mais compacto e equilibrado */
     .hero-card {
       background-color: var(--card-bg); border: 1px solid var(--border-color);
-      border-radius: 12px; padding: 28px; box-shadow: var(--shadow);
+      border-radius: 12px; padding: 22px; box-shadow: var(--shadow);
       border-top: 4px solid var(--accent-orange);
     }
     .hero-card h3 {
-      font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 20px;
+      font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 14px;
     }
-    .meta-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
-    .meta-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); }
-    .meta-item i { color: var(--primary); font-size: 18px; }
+    .meta-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+    .meta-item { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--text-muted); }
+    .meta-item i { color: var(--primary); font-size: 16px; }
 
     section { padding: 80px 0; border-bottom: 1px solid var(--border-color); }
     .section-title {
@@ -255,7 +258,7 @@
 
     @media (max-width: 968px) {
       .hero-grid {
-        grid-template-columns: 1fr; /* No celular empilha os elementos em ordem natural */
+        grid-template-columns: 1fr;
       }
       .hero h1 {
         white-space: normal; 
@@ -285,25 +288,25 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container hero-grid">
-      <!-- Coluna da Esquerda: Textos e Botão -->
+      <!-- Coluna da Esquerda: Textos e Botão Alinhados -->
       <div>
         <span class="badge">Certificação Oficial Internacional</span>
         <h1>Management 3.0 Foundation Workshop</h1>
         <p>Aprenda a liderar equipes de alta performance em ambientes complexos. Uma abordagem prática e inovadora focada em engajamento, autonomia e transformação cultural.</p>
         
-        <div class="btn-center-wrapper">
+        <div class="btn-wrapper">
           <a href="https://sun.eduzz.com/69K1KG1VWO?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener noreferrer" class="btn-primary">
-            <i class="ph ph-ticket" style="font-size: 18px;"></i> Garantir Minha Vaga Agora
+            <i class="ph ph-ticket" style="font-size: 17px;"></i> Garantir Minha Vaga Agora
           </a>
         </div>
       </div>
 
-      <!-- Coluna do Meio: A imagem exata entre o texto e o quadro -->
+      <!-- Coluna do Meio: Imagem com tamanho ajustado e maior destaque -->
       <div class="hero-middle-col">
         <img src="https://i.ibb.co/8DNmhy1x/IMG-20260925-WA0104.jpg" alt="Selo Foundation Workshop" class="hero-custom-image">
       </div>
 
-      <!-- Coluna da Direita: Quadro de Detalhes da Turma -->
+      <!-- Coluna da Direita: Quadro de Detalhes mais compacto -->
       <div>
         <div class="hero-card">
           <h3>Detalhes da Turma</h3>
@@ -312,7 +315,7 @@
             <li class="meta-item"><i class="ph ph-certificate"></i> <span>Certificado Oficial Válido Globalmente</span></li>
             <li class="meta-item"><i class="ph ph-users"></i> <span>Vagas Limitadas para Alta Troca</span></li>
           </ul>
-          <a href="https://sun.eduzz.com/69K1KG1VWO?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%;">
+          <a href="https://sun.eduzz.com/69K1KG1VWO?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%; padding: 10px 16px;">
             Inscreva-se
           </a>
         </div>
@@ -505,7 +508,7 @@
         </div>
       </div>
 
-      <div class="btn-center-wrapper" style="margin-top: 40px;">
+      <div class="btn-wrapper" style="justify-content: center; margin-top: 40px;">
         <a href="https://sun.eduzz.com/69K1KG1VWO?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener noreferrer" class="btn-primary">
           <i class="ph ph-ticket" style="font-size: 18px;"></i> Garantir Minha Vaga Agora
         </a>
