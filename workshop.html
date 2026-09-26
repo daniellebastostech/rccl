@@ -12,26 +12,30 @@
 
   <style>
     :root {
-      --bg-color: #faf9f6;
+      --bg-color: #f7f9fc;
       --card-bg: #ffffff;
-      --text-main: #1d1d2b;
-      --text-muted: #666673;
-      --primary: #8a6f3e;
-      --primary-hover: #725a32;
-      --border-color: #e6e3dd;
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --primary: #0088cc; /* Azul oficial Management 3.0 */
+      --primary-hover: #006b9e;
+      --accent-orange: #f26522; /* Laranja de energia / ferramentas */
+      --accent-green: #00a651; /* Verde do ecossistema / Martie */
+      --border-color: #e2e8f0;
+      --shadow: 0 4px 20px rgba(0, 136, 204, 0.06);
       --transition: all 0.3s ease;
     }
 
     body.dark-mode {
-      --bg-color: #121218;
-      --card-bg: #181822;
-      --text-main: #f1f0f5;
-      --text-muted: #9e9ea8;
-      --primary: #d4b581;
-      --primary-hover: #e0c594;
-      --border-color: #2a2a36;
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --accent-orange: #fb923c;
+      --accent-green: #4ade80;
+      --border-color: #334155;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -69,7 +73,7 @@
       display: flex; align-items: center; justify-content: center;
       transition: var(--transition);
     }
-    .theme-toggle:hover { background-color: rgba(138, 111, 62, 0.1); color: var(--primary); }
+    .theme-toggle:hover { background-color: rgba(0, 136, 204, 0.1); color: var(--primary); }
 
     /* Botão Padrão */
     .btn-primary {
@@ -78,7 +82,7 @@
       border-radius: 6px; display: inline-flex; align-items: center; justify-content: center;
       gap: 8px; transition: var(--transition); text-align: center;
     }
-    body.dark-mode .btn-primary { color: #121218; }
+    body.dark-mode .btn-primary { color: #0f172a; }
     .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
 
     .btn-center-wrapper {
@@ -96,8 +100,8 @@
       display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center;
     }
     .badge {
-      display: inline-block; background-color: rgba(138, 111, 62, 0.1);
-      color: var(--primary); font-size: 12px; font-weight: 700; text-transform: uppercase;
+      display: inline-block; background-color: rgba(0, 166, 81, 0.1);
+      color: var(--accent-green); font-size: 12px; font-weight: 700; text-transform: uppercase;
       letter-spacing: 1.5px; padding: 6px 12px; border-radius: 4px; margin-bottom: 20px;
     }
     .hero h1 {
@@ -110,6 +114,7 @@
     .hero-card {
       background-color: var(--card-bg); border: 1px solid var(--border-color);
       border-radius: 12px; padding: 32px; box-shadow: var(--shadow);
+      border-top: 4px solid var(--accent-orange);
     }
     .hero-card h3 {
       font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 20px;
@@ -159,7 +164,7 @@
       transition: var(--transition);
     }
     .accordion-header:hover {
-      background-color: rgba(138, 111, 62, 0.04);
+      background-color: rgba(0, 136, 204, 0.04);
       color: var(--primary);
     }
     .accordion-header i {
@@ -197,6 +202,7 @@
     .overview-card {
       background-color: var(--card-bg); border: 1px solid var(--border-color);
       border-radius: 10px; padding: 28px; box-shadow: var(--shadow);
+      border-bottom: 3px solid var(--primary);
     }
     .overview-card i { font-size: 28px; color: var(--primary); margin-bottom: 16px; display: block; }
     .overview-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
@@ -211,17 +217,18 @@
       border-radius: 10px; padding: 24px; box-shadow: var(--shadow);
       display: flex; align-items: flex-start; gap: 15px;
     }
-    .target-card i { font-size: 24px; color: var(--primary); margin-top: 2px; }
+    .target-card i { font-size: 24px; color: var(--accent-orange); margin-top: 2px; }
     .target-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
     .target-card p { font-size: 14px; color: var(--text-muted); }
 
-    /* Seção de Princípios (Exatamente como na tua imagem) */
+    /* Seção de Princípios */
     .principles-box {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 12px;
       padding: 36px;
       box-shadow: var(--shadow);
+      border-left: 4px solid var(--accent-green);
     }
     .principles-grid {
       display: grid;
@@ -247,7 +254,7 @@
       gap: 10px;
     }
     .principles-col li i {
-      color: var(--primary);
+      color: var(--accent-green);
       font-size: 18px;
       margin-top: 2px;
     }
@@ -296,7 +303,7 @@
     <div class="container hero-grid">
       <div>
         <span class="badge">Certificação Oficial Internacional</span>
-        <h1>Management 3.0 Foundation Workshop com Rita Lima</h1>
+        <h1>Management 3.0 Foundation Workshop</h1>
         <p>Aprenda a liderar equipes de alta performance em ambientes complexos. Uma abordagem prática e inovadora focada em engajamento, autonomia e transformação cultural.</p>
         
         <div class="btn-center-wrapper">
@@ -315,7 +322,7 @@
             <li class="meta-item"><i class="ph ph-users"></i> <span>Vagas Limitadas para Alta Troca</span></li>
           </ul>
           <a href="https://sun.eduzz.com/69K1KG1VWO?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%;">
-            Inscrever-se no Workshop
+            Inscreva-se
           </a>
         </div>
       </div>
@@ -387,7 +394,7 @@
     </div>
   </section>
 
-  <!-- PRINCÍPIOS DO MANAGEMENT 3.0 (LIMPO DE SPANS) -->
+  <!-- PRINCÍPIOS DO MANAGEMENT 3.0 -->
   <section style="background-color: var(--card-bg);">
     <div class="container">
       <h2 class="section-title">Princípios do Management 3.0</h2>
