@@ -50,7 +50,7 @@
 
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
-    .container { width: min(1000px, 90%); margin: 0 auto; }
+    .container { width: min(1050px, 90%); margin: 0 auto; }
 
     header {
       background-color: var(--card-bg);
@@ -109,19 +109,24 @@
     .hero {
       padding: 80px 0; background-color: var(--bg-color);
     }
+    
+    /* Grid de 3 colunas para o Hero: Texto | Imagem no Meio | Quadro da Turma */
     .hero-grid {
-      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center;
+      display: grid; 
+      grid-template-columns: 1.1fr 0.8fr 0.9fr; 
+      gap: 24px; 
+      align-items: center;
     }
+
     .badge {
       display: inline-block; background-color: rgba(0, 166, 81, 0.1);
       color: var(--accent-green); font-size: 12px; font-weight: 700; text-transform: uppercase;
       letter-spacing: 1.5px; padding: 6px 12px; border-radius: 4px; margin-bottom: 20px;
     }
     
-    /* Título em uma linha só e na cor azul */
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(24px, 3.2vw, 38px); 
+      font-size: clamp(24px, 2.8vw, 36px); 
       line-height: 1.2; 
       font-weight: 700; 
       margin-bottom: 20px; 
@@ -130,22 +135,29 @@
     }
 
     .hero p {
-      color: var(--text-muted); font-size: 16px; margin-bottom: 20px;
+      color: var(--text-muted); font-size: 15px; margin-bottom: 20px;
     }
 
-    /* Estilo para a imagem inserida no espaço marcado */
+    /* Coluna central para a imagem ficar perfeitamente entre o texto e o quadro */
+    .hero-middle-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
     .hero-custom-image {
       width: 100%;
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      object-fit: cover;
-      box-shadow: var(--shadow);
+      max-width: 220px;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
     }
 
     .hero-card {
       background-color: var(--card-bg); border: 1px solid var(--border-color);
-      border-radius: 12px; padding: 32px; box-shadow: var(--shadow);
+      border-radius: 12px; padding: 28px; box-shadow: var(--shadow);
       border-top: 4px solid var(--accent-orange);
     }
     .hero-card h3 {
@@ -242,11 +254,11 @@
     }
 
     @media (max-width: 968px) {
-      .hero-grid, .overview-grid, .testimonials-grid, .target-grid, .principles-grid {
-        grid-template-columns: 1fr;
+      .hero-grid {
+        grid-template-columns: 1fr; /* No celular empilha os elementos em ordem natural */
       }
       .hero h1 {
-        white-space: normal; /* Permite quebrar em telas menores de celular se necessário para não estourar */
+        white-space: normal; 
       }
     }
   </style>
@@ -257,7 +269,6 @@
   <header>
     <div class="container navbar">
       <div class="brand-container">
-        <!-- Logo padrão do Management 3.0 no topo -->
         <a href="https://management30.com/" target="_blank" rel="noopener noreferrer">
           <img src="https://i.ibb.co/gZNyg4XJ/gZNyg4XJ.png" alt="Logo Management 3.0" class="m3-logo">
         </a>
@@ -274,12 +285,10 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container hero-grid">
+      <!-- Coluna da Esquerda: Textos e Botão -->
       <div>
         <span class="badge">Certificação Oficial Internacional</span>
-        
-        <!-- Título em uma linha só e na cor azul -->
         <h1>Management 3.0 Foundation Workshop</h1>
-        
         <p>Aprenda a liderar equipes de alta performance em ambientes complexos. Uma abordagem prática e inovadora focada em engajamento, autonomia e transformação cultural.</p>
         
         <div class="btn-center-wrapper">
@@ -289,10 +298,13 @@
         </div>
       </div>
 
-      <div>
-        <!-- Imagem inserida no espaço entre o texto e o quadro -->
-        <img src="https://i.ibb.co/8DNmhy1x/IMG-20260925-WA0104.jpg" alt="Imagem do Workshop" class="hero-custom-image">
+      <!-- Coluna do Meio: A imagem exata entre o texto e o quadro -->
+      <div class="hero-middle-col">
+        <img src="https://i.ibb.co/8DNmhy1x/IMG-20260925-WA0104.jpg" alt="Selo Foundation Workshop" class="hero-custom-image">
+      </div>
 
+      <!-- Coluna da Direita: Quadro de Detalhes da Turma -->
+      <div>
         <div class="hero-card">
           <h3>Detalhes da Turma</h3>
           <ul class="meta-list">
