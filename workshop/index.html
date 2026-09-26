@@ -117,13 +117,32 @@
       color: var(--accent-green); font-size: 12px; font-weight: 700; text-transform: uppercase;
       letter-spacing: 1.5px; padding: 6px 12px; border-radius: 4px; margin-bottom: 20px;
     }
+    
+    /* Título em uma linha só e na cor azul */
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 4vw, 46px); line-height: 1.2; font-weight: 700; margin-bottom: 20px;
+      font-size: clamp(24px, 3.2vw, 38px); 
+      line-height: 1.2; 
+      font-weight: 700; 
+      margin-bottom: 20px; 
+      white-space: nowrap; 
+      color: var(--primary);
     }
+
     .hero p {
       color: var(--text-muted); font-size: 16px; margin-bottom: 20px;
     }
+
+    /* Estilo para a imagem inserida no espaço marcado */
+    .hero-custom-image {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      object-fit: cover;
+      box-shadow: var(--shadow);
+    }
+
     .hero-card {
       background-color: var(--card-bg); border: 1px solid var(--border-color);
       border-radius: 12px; padding: 32px; box-shadow: var(--shadow);
@@ -226,6 +245,9 @@
       .hero-grid, .overview-grid, .testimonials-grid, .target-grid, .principles-grid {
         grid-template-columns: 1fr;
       }
+      .hero h1 {
+        white-space: normal; /* Permite quebrar em telas menores de celular se necessário para não estourar */
+      }
     }
   </style>
 </head>
@@ -235,9 +257,9 @@
   <header>
     <div class="container navbar">
       <div class="brand-container">
-        <!-- Logotipo atualizado com a sua imagem -->
+        <!-- Logo padrão do Management 3.0 no topo -->
         <a href="https://management30.com/" target="_blank" rel="noopener noreferrer">
-          <img src="https://i.ibb.co/8DNmhy1x/IMG-20260925-WA0104.jpg" alt="Logo Management 3.0 / Rita Lima" class="m3-logo">
+          <img src="https://i.ibb.co/gZNyg4XJ/gZNyg4XJ.png" alt="Logo Management 3.0" class="m3-logo">
         </a>
         <div class="divider-vertical"></div>
         <span class="rccl-brand">Rita Lima</span>
@@ -254,7 +276,10 @@
     <div class="container hero-grid">
       <div>
         <span class="badge">Certificação Oficial Internacional</span>
+        
+        <!-- Título em uma linha só e na cor azul -->
         <h1>Management 3.0 Foundation Workshop</h1>
+        
         <p>Aprenda a liderar equipes de alta performance em ambientes complexos. Uma abordagem prática e inovadora focada em engajamento, autonomia e transformação cultural.</p>
         
         <div class="btn-center-wrapper">
@@ -265,6 +290,9 @@
       </div>
 
       <div>
+        <!-- Imagem inserida no espaço entre o texto e o quadro -->
+        <img src="https://i.ibb.co/8DNmhy1x/IMG-20260925-WA0104.jpg" alt="Imagem do Workshop" class="hero-custom-image">
+
         <div class="hero-card">
           <h3>Detalhes da Turma</h3>
           <ul class="meta-list">
